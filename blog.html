@@ -288,6 +288,17 @@
                 }
             });
         });
+
+        if (window.location.hash) {
+            var id = window.location.hash.slice(1);
+            setTimeout(function() {
+                var el = document.getElementById(id);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                }
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            }, 100);
+        }
     </script>
 <!-- Contact Modal -->
 <div class="fixed inset-0 z-50 hidden items-center justify-center p-4" id="contact-modal">
