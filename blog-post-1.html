@@ -69,7 +69,7 @@
             },
             "spacing": {
                 "gutter": "32px",
-                "section-gap": "120px",
+                "section-gap": "80px",
                 "element-gap": "24px",
                 "margin-mobile": "20px",
                 "container-max": "1200px"
@@ -104,15 +104,18 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        .text-shadow-sm {
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
         /* Rounded minimal native scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(139,113,106,0.3); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(139,113,106,0.5); }
-        html { scrollbar-width: thin; scrollbar-color: rgba(139,113,106,0.3) transparent; }
+        html {
+            overflow-y: scroll;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(139,113,106,0.3) transparent;
+        }
+        body.modal-open { overflow: hidden; }
+        section[id] { scroll-margin-top: 96px; }
     </style>
     <style>
         @keyframes logoPop {
@@ -295,25 +298,29 @@ Back to Blog
             const contactClose = document.getElementById('contact-modal-close');
             const contactSubmit = document.getElementById('contact-submit');
             const contactStatus = document.getElementById('contact-status');
+            const contactModalCard = document.getElementById('contact-modal-card');
 
             if (!contactModal) return;
 
             function openContactModal() {
+                document.body.classList.add('modal-open');
                 contactModal.classList.remove('hidden');
                 contactModal.classList.add('flex');
-                var scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-                document.body.style.paddingRight = scrollbarWidth + 'px';
-                document.documentElement.style.setProperty('--scrollbar-width', scrollbarWidth + 'px');
-                document.body.style.overflow = 'hidden';
                 contactStatus.classList.add('hidden');
+                requestAnimationFrame(function() {
+                    contactBackdrop.classList.remove('opacity-0');
+                    contactModalCard.classList.remove('opacity-0', 'scale-95');
+                });
             }
 
             function closeContactModal() {
-                contactModal.classList.add('hidden');
-                contactModal.classList.remove('flex');
-                document.documentElement.style.removeProperty('--scrollbar-width');
-                document.body.style.paddingRight = '';
-                document.body.style.overflow = '';
+                contactBackdrop.classList.add('opacity-0');
+                contactModalCard.classList.add('opacity-0', 'scale-95');
+                setTimeout(function() {
+                    contactModal.classList.add('hidden');
+                    contactModal.classList.remove('flex');
+                    document.body.classList.remove('modal-open');
+                }, 300);
             }
 
             contactClose?.addEventListener('click', closeContactModal);
@@ -375,8 +382,8 @@ Back to Blog
     </script>
 <!-- Contact Modal -->
 <div class="fixed inset-0 z-50 hidden items-center justify-center p-4" id="contact-modal">
-  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="contact-modal-backdrop"></div>
-  <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 transition-all duration-300" id="contact-modal-backdrop"></div>
+  <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto opacity-0 scale-95 transition-all duration-300" id="contact-modal-card">
     <div class="flex items-center justify-between p-5 py-4 border-b border-outline-variant/30">
       <h3 class="font-headline-sm text-headline-sm">Let's Talk</h3>
       <button class="w-8 h-8 rounded-full hover:bg-surface-container transition-colors flex items-center justify-center" id="contact-modal-close" aria-label="Close">
