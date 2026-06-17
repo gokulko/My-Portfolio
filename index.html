@@ -109,12 +109,24 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
     </style>
+    <style>
+        @keyframes logoPop {
+            0% { transform: scale(0) translateY(20px); opacity: 0; }
+            60% { transform: scale(1.12); opacity: 1; }
+            80% { transform: scale(0.95); }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
 <!-- Header (TopAppBar) -->
 <header class="bg-primary dark:bg-primary docked full-width top-0 sticky z-50">
 <div class="flex justify-between items-center w-full px-gutter py-2 max-w-container-max mx-auto">
-<a class="flex items-center" href="#home"><img alt="Gokul" class="h-[70px] w-auto" onerror="this.style.display='none'" src="assets/logo.png" style="filter: brightness(0) invert(1)"></a>
+<a class="flex items-center" href="#home"><img alt="Gokul" class="h-[70px] w-auto" onerror="this.style.display='none'" src="assets/logo.png" style="filter: brightness(0) invert(1); animation: logoPop 0.7s ease-out 0.1s forwards; opacity: 0"></a>
 <nav class="hidden md:flex gap-8">
 <a class="text-white bg-white/10 rounded-lg px-3 py-1 font-medium font-label-lg text-label-lg transition-colors" href="#home">Home</a>
 <a class="text-white/80 font-medium hover:text-white transition-colors rounded-lg px-3 py-1 text-label-lg font-label-lg" href="#service">Service</a>
@@ -127,7 +139,7 @@
             </button>
 </div>
 </header>
-<main>
+<main style="animation: fadeInUp 0.6s ease-out 0.7s both">
 <!-- Hero Section -->
 <section class="bg-primary-container min-h-[85vh] flex flex-col justify-center relative overflow-hidden transition-all duration-1000 ease-out" id="home">
 <!-- Decorative Light Rays Simulation -->
