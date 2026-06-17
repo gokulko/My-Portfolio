@@ -134,7 +134,7 @@
 <!-- Header (TopAppBar) -->
 <header class="bg-primary dark:bg-primary docked full-width top-0 sticky z-50">
 <div class="flex justify-between items-center w-full px-gutter py-2 max-w-container-max mx-auto">
-<a class="flex items-center" href="#home"><img alt="Gokul" class="h-[70px] w-auto" onerror="this.style.display='none'" src="assets/logo.png" style="filter: brightness(0) invert(1); animation: logoPop 0.5s ease-out 0.1s forwards; opacity: 0"></a>
+<a class="flex items-center" href="#home"><img alt="Gokul" class="h-[50px] md:h-[70px] w-auto" onerror="this.style.display='none'" src="assets/logo.png" style="filter: brightness(0) invert(1); animation: logoPop 0.5s ease-out 0.1s forwards; opacity: 0"></a>
 <nav class="hidden md:flex gap-8">
 <a class="text-white bg-white/10 rounded-lg px-3 py-1 font-medium font-label-lg text-label-lg transition-colors" href="#home">Home</a>
 <a class="text-white/80 font-medium hover:text-white transition-colors rounded-lg px-3 py-1 text-label-lg font-label-lg" href="#service">Service</a>
@@ -142,7 +142,7 @@
 <a class="text-white/80 font-medium hover:text-white transition-colors rounded-lg px-3 py-1 text-label-lg font-label-lg" href="#contact-section">Contact</a>
 <a class="text-white/80 font-medium hover:text-white transition-colors rounded-lg px-3 py-1 text-label-lg font-label-lg" href="blog.html">Blog</a>
 </nav>
-<button class="border border-white/40 text-white px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-white hover:text-primary transition-all active:scale-95" data-contact-trigger>
+<button class="max-sm:hidden border border-white/40 text-white px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-white hover:text-primary transition-all active:scale-95" data-contact-trigger>
                 Let's Talk
             </button>
             <button class="md:hidden text-white p-2" id="menu-toggle" aria-label="Menu">
@@ -167,7 +167,7 @@
 <section class="bg-primary-container min-h-[85vh] flex flex-col justify-center relative overflow-hidden transition-all duration-1000 ease-out pt-20 md:pt-0" id="home">
 <!-- Decorative Light Rays Simulation -->
 <div class="absolute inset-0 opacity-10 pointer-events-none bg-gradient-to-tr from-primary via-transparent to-transparent"></div>
-<div class="max-w-container-max mx-auto px-gutter w-full relative z-10 grid grid-cols-1 md:grid-cols-12 items-center gap-12">
+<div class="max-w-container-max mx-auto px-gutter w-full relative z-10 grid grid-cols-1 md:grid-cols-12 items-center gap-6 md:gap-12">
 <div class="md:col-span-5 flex justify-center md:justify-start">
 <div class="relative">
 <div class="absolute -inset-4 border-2 border-white/30 rounded-full animate-pulse"></div>
@@ -181,7 +181,7 @@
 <p class="font-headline-sm text-headline-sm mb-12 opacity-90">
                         Ideas. Action. Results.
                     </p>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 pt-12 border-t border-white/20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 pt-6 md:mt-16 md:pt-12 border-t border-white/20">
 <div>
 <span class="block text-label-lg font-label-lg opacity-70 mb-2">Specializing In</span>
 <span class="block font-headline-sm text-headline-sm font-bold">Digital Strategy &amp; Execution</span>
@@ -204,10 +204,10 @@
 </div>
 </section>
 <!-- Expertise Section -->
-<section class="py-section-gap bg-background border-t border-outline-variant/30" id="service">
+<section class="py-10 md:py-section-gap bg-background border-t border-outline-variant/30" id="service">
 <div class="max-w-container-max mx-auto px-gutter">
-<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-16">My Expertise</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-8 md:mb-16">My Expertise</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 md:gap-y-16">
 <div class="group border-t border-outline-variant/30 pt-12 hover:border-primary-container transition-colors">
 <div class="mb-8 text-on-surface-variant group-hover:text-primary-container transition-colors">
 <span class="material-symbols-outlined text-[64px]" style="font-variation-settings: 'wght' 200;">search</span>
@@ -244,9 +244,9 @@
 </div>
 </section>
 <!-- Works Section -->
-<section class="py-section-gap bg-surface-container-low transition-all duration-1000 ease-out" id="work">
+<section class="py-10 md:py-section-gap bg-surface-container-low transition-all duration-1000 ease-out" id="work">
 <div class="max-w-container-max mx-auto px-gutter">
-<div class="flex justify-between items-end mb-16">
+<div class="flex justify-between items-end mb-8 md:mb-16">
 <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Our Case Studies</h2>
 <a class="text-primary-container font-label-lg text-label-lg uppercase tracking-widest hover:underline transition-all" href="#">View All Projects</a>
 </div>
@@ -295,11 +295,11 @@
 </div>
 </section>
 <!-- About Me -->
-<section class="py-section-gap bg-surface transition-all duration-1000 ease-out" id="about">
+<section class="py-10 md:py-section-gap bg-surface transition-all duration-1000 ease-out" id="about">
 <div class="max-w-container-max mx-auto px-gutter relative">
 <!-- Large Decorative Background Card -->
 <div class="absolute right-0 top-0 w-3/4 h-full bg-surface-container-low rounded-l-[120px] -z-0"></div>
-<div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-16">
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
 <div class="md:col-span-5">
 <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-8">About Me</h2>
 <div class="space-y-6 text-on-surface-variant max-w-md">
@@ -376,9 +376,9 @@
 </div>
 </section>
 <!-- Testimonials -->
-<section class="py-section-gap bg-background overflow-hidden relative transition-all duration-1000 ease-out">
-<div class="max-w-container-max mx-auto px-gutter text-center">
-<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-16">Client Testimonials</h2>
+<section class="py-10 md:py-section-gap bg-background overflow-hidden relative transition-all duration-1000 ease-out">
+<div class="max-w-container-max mx-auto px-gutter">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-8 md:mb-16">Client Testimonials</h2>
 <div class="relative max-w-4xl mx-auto">
 <div class="overflow-hidden" id="testimonial-slider">
 <div class="flex transition-transform duration-700 ease-out" id="testimonial-track">
@@ -442,10 +442,10 @@
 <button class="w-3 h-3 rounded-full bg-outline-variant hover:bg-primary-container transition-colors" data-index="2"></button>
 </div>
 <!-- Side Controls -->
-<button class="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-primary-container hover:text-white transition-all hidden md:flex" id="testimonial-prev">
+<button class="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 md:bg-white shadow-lg flex items-center justify-center hover:bg-primary-container hover:text-white transition-all z-10 md:-translate-x-1/2" id="testimonial-prev">
 <span class="material-symbols-outlined">chevron_left</span>
 </button>
-<button class="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-primary-container hover:text-white transition-all hidden md:flex" id="testimonial-next">
+<button class="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 md:bg-white shadow-lg flex items-center justify-center hover:bg-primary-container hover:text-white transition-all z-10 md:translate-x-1/2" id="testimonial-next">
 <span class="material-symbols-outlined">chevron_right</span>
 </button>
 </div>
@@ -453,9 +453,9 @@
 </section>
 </main>
 <!-- Contact Section -->
-<section class="py-section-gap bg-surface transition-all duration-1000 ease-out" id="contact-section">
+<section class="py-10 md:py-section-gap bg-surface transition-all duration-1000 ease-out" id="contact-section">
 <div class="max-w-container-max mx-auto px-gutter">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-16">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
 <div class="md:col-span-5">
 <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-8">Get in Touch</h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-12">
@@ -640,6 +640,16 @@ const inactiveClasses = ['text-white/80', 'font-medium', 'hover:text-white', 'tr
 
             slider.addEventListener('mouseenter', function() { clearInterval(autoSlideTimer); });
             slider.addEventListener('mouseleave', function() { resetAutoSlide(); });
+
+            var touchStartX = 0;
+            slider.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            slider.addEventListener('touchend', function(e) {
+                var diff = touchStartX - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) { goToSlide(currentSlide + 1); resetAutoSlide(); }
+                    else { goToSlide(currentSlide - 1); resetAutoSlide(); }
+                }
+            }, { passive: true });
 
             goToSlide(0);
             autoSlideTimer = setInterval(function() { goToSlide(currentSlide + 1); }, 5000);
