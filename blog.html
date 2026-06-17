@@ -107,6 +107,12 @@
         .text-shadow-sm {
             text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
+        /* Rounded minimal native scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(139,113,106,0.3); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(139,113,106,0.5); }
+        html { scrollbar-width: thin; scrollbar-color: rgba(139,113,106,0.3) transparent; }
     </style>
     <style>
         @keyframes logoPop {
@@ -125,7 +131,7 @@
 <!-- Header -->
 <header class="bg-primary dark:bg-primary docked full-width top-0 sticky z-50">
 <div class="flex justify-between items-center w-full px-gutter py-2 max-w-container-max mx-auto">
-<a class="flex items-center" href="index.html"><img alt="Gokul" class="h-[70px] w-auto" onerror="this.style.display='none'" src="assets/logo.png" style="filter: brightness(0) invert(1); animation: logoPop 0.7s ease-out 0.1s forwards; opacity: 0"></a>
+<a class="flex items-center" href="index.html"><img alt="Gokul" class="h-[70px] w-auto" onerror="this.style.display='none'" src="assets/logo.png" style="filter: brightness(0) invert(1); animation: logoPop 0.5s ease-out 0.1s forwards; opacity: 0"></a>
 <nav class="hidden md:flex gap-8">
 <a class="text-white/80 font-medium hover:text-white transition-colors rounded-lg px-3 py-1 text-label-lg font-label-lg" href="index.html">Home</a>
 <a class="text-white/80 font-medium hover:text-white transition-colors rounded-lg px-3 py-1 text-label-lg font-label-lg" href="index.html#service">Service</a>
@@ -136,14 +142,29 @@
 <button class="border border-white/40 text-white px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-white hover:text-primary transition-all active:scale-95" data-contact-trigger>
                 Let's Talk
             </button>
+            <button class="md:hidden text-white p-2" id="menu-toggle" aria-label="Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
 </div>
 </header>
-<main style="animation: fadeInUp 0.6s ease-out 0.7s both">
+<div class="fixed inset-0 z-40 hidden" id="mobile-menu">
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobile-menu-backdrop"></div>
+  <div class="absolute top-0 right-0 w-64 sm:w-72 h-full bg-primary shadow-2xl p-6 pt-24 transform translate-x-full transition-transform duration-300" id="mobile-menu-panel">
+    <nav class="flex flex-col gap-2">
+      <a href="index.html" class="text-white/80 font-medium hover:text-white transition-colors hover:bg-white/10 rounded-lg px-3 py-2 text-label-lg">Home</a>
+      <a href="index.html#service" class="text-white/80 font-medium hover:text-white transition-colors hover:bg-white/10 rounded-lg px-3 py-2 text-label-lg">Service</a>
+      <a href="index.html#work" class="text-white/80 font-medium hover:text-white transition-colors hover:bg-white/10 rounded-lg px-3 py-2 text-label-lg">Work</a>
+      <a href="index.html#contact-section" class="text-white/80 font-medium hover:text-white transition-colors hover:bg-white/10 rounded-lg px-3 py-2 text-label-lg">Contact</a>
+      <a href="blog.html" class="text-white/80 font-medium hover:text-white transition-colors hover:bg-white/10 rounded-lg px-3 py-2 text-label-lg">Blog</a>
+    </nav>
+  </div>
+</div>
+<main style="animation: fadeInUp 0.4s ease-out 0.4s both">
 <!-- Blog Hero -->
 <section class="bg-primary-container min-h-[40vh] flex flex-col justify-center relative overflow-hidden">
 <div class="absolute inset-0 opacity-10 pointer-events-none bg-gradient-to-tr from-primary via-transparent to-transparent"></div>
 <div class="max-w-container-max mx-auto px-gutter w-full relative z-10 text-center">
-<h1 class="font-display text-display text-white mb-4">Blog</h1>
+<h1 class="font-display text-display-mobile md:text-display text-white mb-4">Blog</h1>
 <p class="font-headline-sm text-headline-sm text-white/80 max-w-2xl mx-auto">Digital marketing insights, strategies, and tips to grow your business online.</p>
 </div>
 </section>
@@ -240,10 +261,13 @@
   </div>
 </footer>
 <!-- FAB: Back to Top -->
-<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary-container text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-<span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform">arrow_upward</span>
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary-container text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group" id="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform">arrow_upward</span>
 </button>
-<script>
+
+
+
+    <script>
         const observerOptions = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -270,6 +294,9 @@
             function openContactModal() {
                 contactModal.classList.remove('hidden');
                 contactModal.classList.add('flex');
+                var scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+                document.body.style.paddingRight = scrollbarWidth + 'px';
+                document.documentElement.style.setProperty('--scrollbar-width', scrollbarWidth + 'px');
                 document.body.style.overflow = 'hidden';
                 contactStatus.classList.add('hidden');
             }
@@ -277,6 +304,8 @@
             function closeContactModal() {
                 contactModal.classList.add('hidden');
                 contactModal.classList.remove('flex');
+                document.documentElement.style.removeProperty('--scrollbar-width');
+                document.body.style.paddingRight = '';
                 document.body.style.overflow = '';
             }
 
@@ -311,38 +340,65 @@
                 history.replaceState(null, null, window.location.pathname + window.location.search);
             }, 100);
         }
+
+        (function() {
+            var toggle = document.getElementById('menu-toggle');
+            var menu = document.getElementById('mobile-menu');
+            var panel = document.getElementById('mobile-menu-panel');
+            var backdrop = document.getElementById('mobile-menu-backdrop');
+            if (!toggle || !menu) return;
+            function openMenu() {
+                menu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                requestAnimationFrame(function() {
+                    panel.classList.remove('translate-x-full');
+                });
+            }
+            function closeMenu() {
+                panel.classList.add('translate-x-full');
+                setTimeout(function() {
+                    menu.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+            toggle.addEventListener('click', openMenu);
+            if (backdrop) backdrop.addEventListener('click', closeMenu);
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+        })();
     </script>
 <!-- Contact Modal -->
 <div class="fixed inset-0 z-50 hidden items-center justify-center p-4" id="contact-modal">
   <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="contact-modal-backdrop"></div>
   <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-    <div class="flex items-center justify-between p-6 border-b border-outline-variant/30">
+    <div class="flex items-center justify-between p-5 py-4 border-b border-outline-variant/30">
       <h3 class="font-headline-sm text-headline-sm">Let's Talk</h3>
       <button class="w-8 h-8 rounded-full hover:bg-surface-container transition-colors flex items-center justify-center" id="contact-modal-close" aria-label="Close">
         <span class="material-symbols-outlined">close</span>
       </button>
     </div>
-    <div class="p-6 space-y-4">
+    <div class="p-5 space-y-3">
       <div class="space-y-2">
-        <label class="text-label-lg font-label-lg text-on-surface-variant" for="contact-name">Name</label>
-        <input class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all" id="contact-name" placeholder="Your Name">
+        <label class="text-label-lg font-label-lg font-semibold text-on-surface-variant" for="contact-name">Name</label>
+        <input class="w-full px-4 py-3 rounded-2xl border border-outline-variant/50 bg-white focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all" id="contact-name" placeholder="Your Name">
       </div>
       <div class="space-y-2">
-        <label class="text-label-lg font-label-lg text-on-surface-variant" for="contact-email">Email</label>
-        <input class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all" id="contact-email" placeholder="Your Email" type="email">
+        <label class="text-label-lg font-label-lg font-semibold text-on-surface-variant" for="contact-email">Email</label>
+        <input class="w-full px-4 py-3 rounded-2xl border border-outline-variant/50 bg-white focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all" id="contact-email" placeholder="Your Email" type="email">
       </div>
       <div class="space-y-2">
-        <label class="text-label-lg font-label-lg text-on-surface-variant" for="contact-subject">Subject</label>
-        <input class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all" id="contact-subject" placeholder="Project Subject">
+        <label class="text-label-lg font-label-lg font-semibold text-on-surface-variant" for="contact-subject">Subject</label>
+        <input class="w-full px-4 py-3 rounded-2xl border border-outline-variant/50 bg-white focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all" id="contact-subject" placeholder="Project Subject">
       </div>
       <div class="space-y-2">
-        <label class="text-label-lg font-label-lg text-on-surface-variant" for="contact-message">Message</label>
-        <textarea class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all min-h-[150px]" id="contact-message" placeholder="Tell me about your project"></textarea>
+        <label class="text-label-lg font-label-lg font-semibold text-on-surface-variant" for="contact-message">Message</label>
+        <textarea class="w-full px-4 py-3 rounded-2xl border border-outline-variant/50 bg-white focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all min-h-[100px]" id="contact-message" placeholder="Tell me about your project"></textarea>
       </div>
-      <button class="w-full bg-primary-container text-white py-4 rounded-full font-headline-sm text-headline-sm font-bold hover:opacity-90 transition-all active:scale-[0.98] shadow-lg shadow-primary-container/20" id="contact-submit" type="button">Send Message</button>
+      <button class="w-full bg-primary-container text-white py-3 rounded-2xl font-headline-sm text-headline-sm font-bold hover:opacity-90 transition-all active:scale-[0.98] shadow-lg shadow-primary-container/20" id="contact-submit" type="button">Send Message</button>
       <p class="hidden text-center text-label-lg text-primary-container" id="contact-status">Form backend not connected yet — please email me directly at gokul@example.com</p>
     </div>
   </div>
 </div>
+
+
 </body>
 </html>
