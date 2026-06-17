@@ -632,6 +632,18 @@ const inactiveClasses = ['text-white/80', 'font-medium', 'hover:text-white', 'tr
                 contactStatus.classList.remove('hidden');
             });
         });
+
+        document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (href === '#') return;
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = document.getElementById(href.slice(1));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
     </script>
 <!-- Contact Modal -->
 <div class="fixed inset-0 z-50 hidden items-center justify-center p-4" id="contact-modal">
